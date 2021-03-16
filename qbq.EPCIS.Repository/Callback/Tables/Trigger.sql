@@ -1,0 +1,11 @@
+﻿CREATE TABLE [Callback].[Trigger] (
+    [ID]  BIGINT         IDENTITY (1, 1) NOT NULL,
+    [URN] NVARCHAR (512) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Trigger_URN]
+    ON [Callback].[Trigger]([URN] ASC);
+

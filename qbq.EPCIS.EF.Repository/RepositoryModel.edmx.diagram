@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="09273fb108f14d3595d2ad7f9291522a" Name="Diagram1">
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Settings" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Time" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Schedule" Width="1.5" PointX="7.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Schedule_Part" Width="1.5" PointX="9.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Subscription" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Trigger" Width="1.5" PointX="7.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISDocumentHeader" Width="1.5" PointX="5.25" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.BusinessTransactionID" Width="1.5" PointX="5.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPC" Width="1.5" PointX="8.25" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_BusinessTransactionID" Width="1.5" PointX="7.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_DocumentHeader" Width="1.5" PointX="7.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_EPC" Width="1.5" PointX="10.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_QuantityElement" Width="1.5" PointX="10.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_SourceDestination" Width="1.5" PointX="10.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_TransformationID" Width="1.5" PointX="7.5" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Value" Width="1.5" PointX="13.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Datetime" Width="1.5" PointX="15.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Hierarchy" Width="1.5" PointX="15.75" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Numeric" Width="1.5" PointX="15.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_String" Width="1.5" PointX="18.75" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Vocabulary" Width="1.5" PointX="13.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.QuantityElement" Width="1.5" PointX="5.25" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.TransformationID" Width="1.5" PointX="5.25" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Value_String" Width="1.5" PointX="16.5" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISEvent_Queue" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.EPCISMasterData_Queue" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Error" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.AttributeType" Width="1.5" PointX="5.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.Vocabulary" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.VocabularyAttribute" Width="1.5" PointX="10.5" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.VocabularyChildren" Width="1.5" PointX="5.25" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.VocabularyType" Width="1.5" PointX="0.75" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.VocabularyType_Client" Width="1.5" PointX="12.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="qbq.EPCIS.RepositoryModel.HELP" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_Analysis_Settings_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Schedule_Part_ToSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Schedule_ToSubscription" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Subscription_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_BusinessTransactionID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPC_EPC" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_BusinessTransactionID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_DocumentHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_EPC" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_QuantityElement" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_SourceDestination" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_EPCISEvent_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Event_EPCISEvent_TransformationID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_EPCISEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_QuantityElement_EPCISEvent_QuantityElement" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_SourceDestinationID_EPCISEvent_SourceDestination" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_SourceDestinationTypeID_EPCISEvent_SourceDestination" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_TransformationID_EPCISEvent_TransformationID" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_Datetime_EPCISEvent_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_Numeric_EPCISEvent_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_String_EPCISEvent_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_EPCISEvent_Value_DataType" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_EPCISEvent_Value_ValueType" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_EPCISEvent_Value_String_String_Value" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_EPCISEvent_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_VocabularyElement_QuantityElement" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_AttributeType_VocabularyAttribute" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_ContentType_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_VocabularyAttribute" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_VocabularyChildren" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_Vocabulary_VocabularyChildren_Child" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_VocabularyType_Client_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_VocabularyType_Vocabulary" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.FK_VocabularyType_Client_VocabularyClient" ManuallyRouted="false" />
+        <AssociationConnector Association="qbq.EPCIS.RepositoryModel.Subscription_Trigger" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

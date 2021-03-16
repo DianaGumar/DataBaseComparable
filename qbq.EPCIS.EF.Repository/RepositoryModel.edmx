@@ -1,0 +1,2664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="qbq.EPCIS.RepositoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="PK_Date" />
+          </Key>
+          <Property Name="PK_Date" Type="date" Nullable="false" />
+          <Property Name="Date_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="Year_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Half_Year" Type="datetime" />
+          <Property Name="Half_Year_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quarter" Type="datetime" />
+          <Property Name="Quarter_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Month" Type="datetime" />
+          <Property Name="Month_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Week" Type="datetime" />
+          <Property Name="Week_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day_Of_Year" Type="int" />
+          <Property Name="Day_Of_Year_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day_Of_Half_Year" Type="int" />
+          <Property Name="Day_Of_Half_Year_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day_Of_Quarter" Type="int" />
+          <Property Name="Day_Of_Quarter_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day_Of_Month" Type="int" />
+          <Property Name="Day_Of_Month_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day_Of_Week" Type="int" />
+          <Property Name="Day_Of_Week_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Week_Of_Year" Type="int" />
+          <Property Name="Month_Of_Year" Type="int" />
+          <Property Name="Month_Of_Half_Year" Type="int" />
+          <Property Name="Month_Of_Quarter" Type="int" />
+          <Property Name="Quarter_Of_Year" Type="int" />
+          <Property Name="Quarter_Of_Half_Year" Type="int" />
+          <Property Name="Half_Year_Of_Year" Type="int" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriptionID" Type="bigint" Nullable="false" />
+          <Property Name="NextRun" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule_Part">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+            <PropertyRef Name="DatePart" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="ScheduleID" Type="bigint" Nullable="false" />
+          <Property Name="DatePart" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Value" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Subscription" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Query" Type="xml" Nullable="false" />
+          <Property Name="DestinationEndpoint" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="InitialRecordTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="LastRecordTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="ReportIfEmpty" Type="bit" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscription_Trigger">
+          <Key>
+            <PropertyRef Name="SubscriptionID" />
+            <PropertyRef Name="TriggerID" />
+          </Key>
+          <Property Name="SubscriptionID" Type="bigint" Nullable="false" />
+          <Property Name="TriggerID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trigger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISDocumentHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HeaderVersion" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="EPCISDocumentHeader" Type="xml" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusinessTransactionID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="BusinessTransactionTypeID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="EventTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="RecordTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="EventTimeZoneOffset" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="XmlRepresentation" Type="xml" Nullable="false" />
+          <Property Name="Error" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_BusinessTransactionID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="BusinessTransactionIDID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_DocumentHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="DocumentHeaderID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_EPC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="EPCID" Type="bigint" Nullable="false" />
+          <Property Name="IsParentID" Type="bit" Nullable="false" />
+          <Property Name="IsInput" Type="bit" Nullable="false" />
+          <Property Name="IsOutput" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_QuantityElement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="IsInput" Type="bit" Nullable="false" />
+          <Property Name="IsOutput" Type="bit" Nullable="false" />
+          <Property Name="QuantityElementID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_SourceDestination">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsSource" Type="bit" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="SourceDestinationID" Type="bigint" Nullable="false" />
+          <Property Name="SourceDestinationTypeID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_TransformationID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="TransformationIDID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="ValueTypeID" Type="bigint" Nullable="false" />
+          <Property Name="DataTypeID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Datetime">
+          <Key>
+            <PropertyRef Name="EPCISEvent_ValueID" />
+          </Key>
+          <Property Name="EPCISEvent_ValueID" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Hierarchy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEvent_ValueID" Type="bigint" Nullable="false" />
+          <Property Name="Parent_EPCISEvent_ValueID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Numeric">
+          <Key>
+            <PropertyRef Name="EPCISEvent_ValueID" />
+          </Key>
+          <Property Name="EPCISEvent_ValueID" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_String">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEvent_ValueID" Type="bigint" Nullable="false" />
+          <Property Name="Value_StringID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCISEventID" Type="bigint" Nullable="false" />
+          <Property Name="VocabularyID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuantityElement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPCClassID" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="UOM" Type="nchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransformationID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Value_String">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="EPCISEvent" Type="xml" Nullable="false" />
+          <Property Name="Processed" Type="bit" Nullable="false" />
+          <Property Name="Error" Type="bit" Nullable="false" />
+          <Property Name="EPCISEventOriginal" Type="xml" />
+        </EntityType>
+        <EntityType Name="EPCISMasterData_Queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="EPCISMasterData" Type="xml" Nullable="false" />
+          <Property Name="Processed" Type="bit" Nullable="false" />
+          <Property Name="Error" Type="bit" Nullable="false" />
+          <Property Name="EPCISMasterDataOriginal" Type="xml" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStampGeneration" Type="datetime" Nullable="false" />
+          <Property Name="AdditionalInformation" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="ErrorNumber" Type="int" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="int" Nullable="false" />
+          <Property Name="ErrorProcedure" Type="nvarchar" MaxLength="126" Nullable="false" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="ErrorLine" Type="int" Nullable="false" />
+          <Property Name="ErrorState" Type="int" Nullable="false" />
+          <Property Name="ObjectID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'qbq.EPCIS.Repository.Import.HELP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HELP">
+          <Key>
+            <PropertyRef Name="ObjectID" />
+          </Key>
+          <Property Name="ObjectID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContentTypeID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="VocabularyTypeID" Type="bigint" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VocabularyAttribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VocabularyID" Type="bigint" Nullable="false" />
+          <Property Name="AttributeTypeID" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="xml" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VocabularyChildren">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VocabularyID" Type="bigint" Nullable="false" />
+          <Property Name="ChildVocabularyID" Type="bigint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VocabularyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URN" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaxOccurs" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VocabularyType_Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="VocabularyTypeID" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="VocabularyTypeID" Type="bigint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AttributeType_VocabularyAttribute">
+          <End Role="AttributeType" Type="Self.AttributeType" Multiplicity="1" />
+          <End Role="VocabularyAttribute" Type="Self.VocabularyAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyAttribute">
+              <PropertyRef Name="AttributeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID">
+          <End Role="BusinessTransactionID" Type="Self.BusinessTransactionID" Multiplicity="1" />
+          <End Role="EPCISEvent_BusinessTransactionID" Type="Self.EPCISEvent_BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessTransactionID">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_BusinessTransactionID">
+              <PropertyRef Name="BusinessTransactionIDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContentType_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="AttributeType" Type="Self.AttributeType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeType">
+              <PropertyRef Name="ContentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader">
+          <End Role="EPCISDocumentHeader" Type="Self.EPCISDocumentHeader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_DocumentHeader" Type="Self.EPCISEvent_DocumentHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISDocumentHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_DocumentHeader">
+              <PropertyRef Name="DocumentHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPC_EPC">
+          <End Role="EPC" Type="Self.EPC" Multiplicity="1" />
+          <End Role="EPCISEvent_EPC" Type="Self.EPCISEvent_EPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_EPC">
+              <PropertyRef Name="EPCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_BusinessTransactionID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_BusinessTransactionID" Type="Self.EPCISEvent_BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_BusinessTransactionID">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_DocumentHeader">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_DocumentHeader" Type="Self.EPCISEvent_DocumentHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_DocumentHeader">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_EPC">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_EPC" Type="Self.EPCISEvent_EPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_EPC">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_QuantityElement">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_QuantityElement" Type="Self.EPCISEvent_QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_QuantityElement">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_SourceDestination">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_Vocabulary">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Vocabulary" Type="Self.EPCISEvent_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Vocabulary">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Datetime_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Datetime" Type="Self.EPCISEvent_Value_Datetime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Datetime">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Hierarchy" Type="Self.EPCISEvent_Value_Hierarchy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Hierarchy">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1" />
+          <End Role="EPCISEvent_Value_Hierarchy" Type="Self.EPCISEvent_Value_Hierarchy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Hierarchy">
+              <PropertyRef Name="Parent_EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Numeric_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Numeric" Type="Self.EPCISEvent_Value_Numeric" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Numeric">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_String_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_String" Type="Self.EPCISEvent_Value_String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_String">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_String_String_Value">
+          <End Role="Value_String" Type="Self.Value_String" Multiplicity="1" />
+          <End Role="EPCISEvent_Value_String" Type="Self.EPCISEvent_Value_String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Value_String">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_String">
+              <PropertyRef Name="Value_StringID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EPCISEvent_TransformationID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_TransformationID" Type="Self.EPCISEvent_TransformationID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_TransformationID">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuantityElement_EPCISEvent_QuantityElement">
+          <End Role="QuantityElement" Type="Self.QuantityElement" Multiplicity="1" />
+          <End Role="EPCISEvent_QuantityElement" Type="Self.EPCISEvent_QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityElement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_QuantityElement">
+              <PropertyRef Name="QuantityElementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Part_ToSchedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule_Part" Type="Self.Schedule_Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule_Part">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_ToSubscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="SubscriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceDestinationID_EPCISEvent_SourceDestination">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="SourceDestinationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceDestinationTypeID_EPCISEvent_SourceDestination">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="SourceDestinationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscription_Trigger_ToSubscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Subscription_Trigger" Type="Self.Subscription_Trigger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Subscription_Trigger">
+              <PropertyRef Name="SubscriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscription_Trigger_ToTrigger">
+          <End Role="Trigger" Type="Self.Trigger" Multiplicity="1" />
+          <End Role="Subscription_Trigger" Type="Self.Subscription_Trigger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trigger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Subscription_Trigger">
+              <PropertyRef Name="TriggerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscription_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Subscription">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransformationID_EPCISEvent_TransformationID">
+          <End Role="TransformationID" Type="Self.TransformationID" Multiplicity="1" />
+          <End Role="EPCISEvent_TransformationID" Type="Self.EPCISEvent_TransformationID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransformationID">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_TransformationID">
+              <PropertyRef Name="TransformationIDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_Analysis_Settings_ClientID">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_BusinessTransactionID">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="BusinessTransactionID" Type="Self.BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BusinessTransactionID">
+              <PropertyRef Name="BusinessTransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Value_DataType">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="DataTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Value_ValueType">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="ValueTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Vocabulary" Type="Self.EPCISEvent_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Vocabulary">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Vocabulary1" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary1">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyAttribute">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyAttribute" Type="Self.VocabularyAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyAttribute">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyChildren">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyChildren" Type="Self.VocabularyChildren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyChildren">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyChildren_Child">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyChildren" Type="Self.VocabularyChildren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyChildren">
+              <PropertyRef Name="ChildVocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyElement_QuantityElement">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuantityElement" Type="Self.QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QuantityElement">
+              <PropertyRef Name="EPCClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Client_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyType_Client" Type="Self.VocabularyType_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyType_Client">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Client_VocabularyClient">
+          <End Role="VocabularyType" Type="Self.VocabularyType" Multiplicity="1" />
+          <End Role="VocabularyType_Client" Type="Self.VocabularyType_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyType_Client">
+              <PropertyRef Name="VocabularyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Vocabulary">
+          <End Role="VocabularyType" Type="Self.VocabularyType" Multiplicity="1" />
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary">
+              <PropertyRef Name="VocabularyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="qbqEPCISRepositoryModelStoreContainer">
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="Analysis" store:Type="Tables" />
+          <EntitySet Name="Time" EntityType="Self.Time" Schema="Analysis" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="Callback" store:Type="Tables" />
+          <EntitySet Name="Schedule_Part" EntityType="Self.Schedule_Part" Schema="Callback" store:Type="Tables" />
+          <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="Callback" store:Type="Tables" />
+          <EntitySet Name="Subscription_Trigger" EntityType="Self.Subscription_Trigger" Schema="Callback" store:Type="Tables" />
+          <EntitySet Name="Trigger" EntityType="Self.Trigger" Schema="Callback" store:Type="Tables" />
+          <EntitySet Name="EPCISDocumentHeader" EntityType="Self.EPCISDocumentHeader" Schema="DocumentHeader" store:Type="Tables" />
+          <EntitySet Name="BusinessTransactionID" EntityType="Self.BusinessTransactionID" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPC" EntityType="Self.EPC" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent" EntityType="Self.EPCISEvent" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_BusinessTransactionID" EntityType="Self.EPCISEvent_BusinessTransactionID" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_DocumentHeader" EntityType="Self.EPCISEvent_DocumentHeader" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_EPC" EntityType="Self.EPCISEvent_EPC" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_QuantityElement" EntityType="Self.EPCISEvent_QuantityElement" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_SourceDestination" EntityType="Self.EPCISEvent_SourceDestination" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_TransformationID" EntityType="Self.EPCISEvent_TransformationID" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Value" EntityType="Self.EPCISEvent_Value" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Value_Datetime" EntityType="Self.EPCISEvent_Value_Datetime" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Value_Hierarchy" EntityType="Self.EPCISEvent_Value_Hierarchy" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Value_Numeric" EntityType="Self.EPCISEvent_Value_Numeric" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Value_String" EntityType="Self.EPCISEvent_Value_String" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Vocabulary" EntityType="Self.EPCISEvent_Vocabulary" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="QuantityElement" EntityType="Self.QuantityElement" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="TransformationID" EntityType="Self.TransformationID" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="Value_String" EntityType="Self.Value_String" Schema="Event" store:Type="Tables" />
+          <EntitySet Name="EPCISEvent_Queue" EntityType="Self.EPCISEvent_Queue" Schema="Import" store:Type="Tables" />
+          <EntitySet Name="EPCISMasterData_Queue" EntityType="Self.EPCISMasterData_Queue" Schema="Import" store:Type="Tables" />
+          <EntitySet Name="Error" EntityType="Self.Error" Schema="Import" store:Type="Tables" />
+          <EntitySet Name="AttributeType" EntityType="Self.AttributeType" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="Vocabulary" EntityType="Self.Vocabulary" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="VocabularyAttribute" EntityType="Self.VocabularyAttribute" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="VocabularyChildren" EntityType="Self.VocabularyChildren" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="VocabularyType" EntityType="Self.VocabularyType" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="VocabularyType_Client" EntityType="Self.VocabularyType_Client" Schema="Vocabulary" store:Type="Tables" />
+          <EntitySet Name="HELP" EntityType="Self.HELP" store:Type="Tables" store:Schema="Import">
+            <DefiningQuery>SELECT 
+    [HELP].[ObjectID] AS [ObjectID]
+    FROM [Import].[HELP] AS [HELP]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AttributeType_VocabularyAttribute" Association="Self.FK_AttributeType_VocabularyAttribute">
+            <End Role="AttributeType" EntitySet="AttributeType" />
+            <End Role="VocabularyAttribute" EntitySet="VocabularyAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID" Association="Self.FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID">
+            <End Role="BusinessTransactionID" EntitySet="BusinessTransactionID" />
+            <End Role="EPCISEvent_BusinessTransactionID" EntitySet="EPCISEvent_BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContentType_Vocabulary" Association="Self.FK_ContentType_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="AttributeType" EntitySet="AttributeType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader" Association="Self.FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader">
+            <End Role="EPCISDocumentHeader" EntitySet="EPCISDocumentHeader" />
+            <End Role="EPCISEvent_DocumentHeader" EntitySet="EPCISEvent_DocumentHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPC_EPC" Association="Self.FK_EPCISEvent_EPC_EPC">
+            <End Role="EPC" EntitySet="EPC" />
+            <End Role="EPCISEvent_EPC" EntitySet="EPCISEvent_EPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_BusinessTransactionID" Association="Self.FK_EPCISEvent_EPCISEvent_BusinessTransactionID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_BusinessTransactionID" EntitySet="EPCISEvent_BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_DocumentHeader" Association="Self.FK_EPCISEvent_EPCISEvent_DocumentHeader">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_DocumentHeader" EntitySet="EPCISEvent_DocumentHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_EPC" Association="Self.FK_EPCISEvent_EPCISEvent_EPC">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_EPC" EntitySet="EPCISEvent_EPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_QuantityElement" Association="Self.FK_EPCISEvent_EPCISEvent_QuantityElement">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_QuantityElement" EntitySet="EPCISEvent_QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_SourceDestination" Association="Self.FK_EPCISEvent_EPCISEvent_SourceDestination">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID" Association="Self.FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_Vocabulary" Association="Self.FK_EPCISEvent_EPCISEvent_Vocabulary">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_Vocabulary" EntitySet="EPCISEvent_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Datetime_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Datetime_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Datetime" EntitySet="EPCISEvent_Value_Datetime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Hierarchy" EntitySet="EPCISEvent_Value_Hierarchy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Hierarchy" EntitySet="EPCISEvent_Value_Hierarchy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Numeric_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Numeric_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Numeric" EntitySet="EPCISEvent_Value_Numeric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_String_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_String_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_String" EntitySet="EPCISEvent_Value_String" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_String_String_Value" Association="Self.FK_EPCISEvent_Value_String_String_Value">
+            <End Role="Value_String" EntitySet="Value_String" />
+            <End Role="EPCISEvent_Value_String" EntitySet="EPCISEvent_Value_String" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EPCISEvent_TransformationID" Association="Self.FK_Event_EPCISEvent_TransformationID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_TransformationID" EntitySet="EPCISEvent_TransformationID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuantityElement_EPCISEvent_QuantityElement" Association="Self.FK_QuantityElement_EPCISEvent_QuantityElement">
+            <End Role="QuantityElement" EntitySet="QuantityElement" />
+            <End Role="EPCISEvent_QuantityElement" EntitySet="EPCISEvent_QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Part_ToSchedule" Association="Self.FK_Schedule_Part_ToSchedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Schedule_Part" EntitySet="Schedule_Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_ToSubscription" Association="Self.FK_Schedule_ToSubscription">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceDestinationID_EPCISEvent_SourceDestination" Association="Self.FK_SourceDestinationID_EPCISEvent_SourceDestination">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceDestinationTypeID_EPCISEvent_SourceDestination" Association="Self.FK_SourceDestinationTypeID_EPCISEvent_SourceDestination">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscription_Trigger_ToSubscription" Association="Self.FK_Subscription_Trigger_ToSubscription">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="Subscription_Trigger" EntitySet="Subscription_Trigger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscription_Trigger_ToTrigger" Association="Self.FK_Subscription_Trigger_ToTrigger">
+            <End Role="Trigger" EntitySet="Trigger" />
+            <End Role="Subscription_Trigger" EntitySet="Subscription_Trigger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscription_Vocabulary" Association="Self.FK_Subscription_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Subscription" EntitySet="Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransformationID_EPCISEvent_TransformationID" Association="Self.FK_TransformationID_EPCISEvent_TransformationID">
+            <End Role="TransformationID" EntitySet="TransformationID" />
+            <End Role="EPCISEvent_TransformationID" EntitySet="EPCISEvent_TransformationID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_Analysis_Settings_ClientID" Association="Self.FK_Vocabulary_Analysis_Settings_ClientID">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_BusinessTransactionID" Association="Self.FK_Vocabulary_BusinessTransactionID">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="BusinessTransactionID" EntitySet="BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent" Association="Self.FK_Vocabulary_EPCISEvent">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Value_DataType" Association="Self.FK_Vocabulary_EPCISEvent_Value_DataType">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Value_ValueType" Association="Self.FK_Vocabulary_EPCISEvent_Value_ValueType">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Vocabulary" Association="Self.FK_Vocabulary_EPCISEvent_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Vocabulary" EntitySet="EPCISEvent_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_Vocabulary" Association="Self.FK_Vocabulary_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Vocabulary1" EntitySet="Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyAttribute" Association="Self.FK_Vocabulary_VocabularyAttribute">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyAttribute" EntitySet="VocabularyAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyChildren" Association="Self.FK_Vocabulary_VocabularyChildren">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyChildren" EntitySet="VocabularyChildren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyChildren_Child" Association="Self.FK_Vocabulary_VocabularyChildren_Child">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyChildren" EntitySet="VocabularyChildren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyElement_QuantityElement" Association="Self.FK_VocabularyElement_QuantityElement">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="QuantityElement" EntitySet="QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Client_Vocabulary" Association="Self.FK_VocabularyType_Client_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyType_Client" EntitySet="VocabularyType_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Client_VocabularyClient" Association="Self.FK_VocabularyType_Client_VocabularyClient">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="VocabularyType_Client" EntitySet="VocabularyType_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Vocabulary" Association="Self.FK_VocabularyType_Vocabulary">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="qbq.EPCIS.RepositoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_Analysis_Settings_ClientID" FromRole="Settings" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="PK_Date" />
+          </Key>
+          <Property Name="PK_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="DateTime" Precision="3" />
+          <Property Name="Year_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Half_Year" Type="DateTime" Precision="3" />
+          <Property Name="Half_Year_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quarter" Type="DateTime" Precision="3" />
+          <Property Name="Quarter_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Month" Type="DateTime" Precision="3" />
+          <Property Name="Month_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Week" Type="DateTime" Precision="3" />
+          <Property Name="Week_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day_Of_Year" Type="Int32" />
+          <Property Name="Day_Of_Year_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day_Of_Half_Year" Type="Int32" />
+          <Property Name="Day_Of_Half_Year_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day_Of_Quarter" Type="Int32" />
+          <Property Name="Day_Of_Quarter_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day_Of_Month" Type="Int32" />
+          <Property Name="Day_Of_Month_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day_Of_Week" Type="Int32" />
+          <Property Name="Day_Of_Week_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Week_Of_Year" Type="Int32" />
+          <Property Name="Month_Of_Year" Type="Int32" />
+          <Property Name="Month_Of_Half_Year" Type="Int32" />
+          <Property Name="Month_Of_Quarter" Type="Int32" />
+          <Property Name="Quarter_Of_Year" Type="Int32" />
+          <Property Name="Quarter_Of_Half_Year" Type="Int32" />
+          <Property Name="Half_Year_Of_Year" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriptionID" Type="Int64" Nullable="false" />
+          <Property Name="NextRun" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Schedule_Part" Relationship="Self.FK_Schedule_Part_ToSchedule" FromRole="Schedule" ToRole="Schedule_Part" />
+          <NavigationProperty Name="Subscription" Relationship="Self.FK_Schedule_ToSubscription" FromRole="Schedule" ToRole="Subscription" />
+        </EntityType>
+        <EntityType Name="Schedule_Part">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+            <PropertyRef Name="DatePart" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="ScheduleID" Type="Int64" Nullable="false" />
+          <Property Name="DatePart" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_Schedule_Part_ToSchedule" FromRole="Schedule_Part" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subscription1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Query" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DestinationEndpoint" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InitialRecordTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastRecordTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReportIfEmpty" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_Schedule_ToSubscription" FromRole="Subscription" ToRole="Schedule" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Subscription_Vocabulary" FromRole="Subscription" ToRole="Vocabulary" />
+          <NavigationProperty Name="Trigger" Relationship="Self.Subscription_Trigger" FromRole="Subscription" ToRole="Trigger" />
+        </EntityType>
+        <EntityType Name="Trigger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Subscription" Relationship="Self.Subscription_Trigger" FromRole="Trigger" ToRole="Subscription" />
+        </EntityType>
+        <EntityType Name="EPCISDocumentHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HeaderVersion" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EPCISDocumentHeader1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_DocumentHeader" Relationship="Self.FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader" FromRole="EPCISDocumentHeader" ToRole="EPCISEvent_DocumentHeader" />
+        </EntityType>
+        <EntityType Name="BusinessTransactionID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusinessTransactionTypeID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_BusinessTransactionID" Relationship="Self.FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID" FromRole="BusinessTransactionID" ToRole="EPCISEvent_BusinessTransactionID" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_BusinessTransactionID" FromRole="BusinessTransactionID" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="EPC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_EPC" Relationship="Self.FK_EPCISEvent_EPC_EPC" FromRole="EPC" ToRole="EPCISEvent_EPC" />
+        </EntityType>
+        <EntityType Name="EPCISEvent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="EventTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EventTimeZoneOffset" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="XmlRepresentation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Error" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_BusinessTransactionID" Relationship="Self.FK_EPCISEvent_EPCISEvent_BusinessTransactionID" FromRole="EPCISEvent" ToRole="EPCISEvent_BusinessTransactionID" />
+          <NavigationProperty Name="EPCISEvent_DocumentHeader" Relationship="Self.FK_EPCISEvent_EPCISEvent_DocumentHeader" FromRole="EPCISEvent" ToRole="EPCISEvent_DocumentHeader" />
+          <NavigationProperty Name="EPCISEvent_EPC" Relationship="Self.FK_EPCISEvent_EPCISEvent_EPC" FromRole="EPCISEvent" ToRole="EPCISEvent_EPC" />
+          <NavigationProperty Name="EPCISEvent_QuantityElement" Relationship="Self.FK_EPCISEvent_EPCISEvent_QuantityElement" FromRole="EPCISEvent" ToRole="EPCISEvent_QuantityElement" />
+          <NavigationProperty Name="EPCISEvent_SourceDestination" Relationship="Self.FK_EPCISEvent_EPCISEvent_SourceDestination" FromRole="EPCISEvent" ToRole="EPCISEvent_SourceDestination" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID" FromRole="EPCISEvent" ToRole="EPCISEvent_Value" />
+          <NavigationProperty Name="EPCISEvent_Vocabulary" Relationship="Self.FK_EPCISEvent_EPCISEvent_Vocabulary" FromRole="EPCISEvent" ToRole="EPCISEvent_Vocabulary" />
+          <NavigationProperty Name="EPCISEvent_TransformationID" Relationship="Self.FK_Event_EPCISEvent_TransformationID" FromRole="EPCISEvent" ToRole="EPCISEvent_TransformationID" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_EPCISEvent" FromRole="EPCISEvent" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_BusinessTransactionID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="BusinessTransactionIDID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="BusinessTransactionID" Relationship="Self.FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID" FromRole="EPCISEvent_BusinessTransactionID" ToRole="BusinessTransactionID" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_BusinessTransactionID" FromRole="EPCISEvent_BusinessTransactionID" ToRole="EPCISEvent" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_DocumentHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="DocumentHeaderID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISDocumentHeader" Relationship="Self.FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader" FromRole="EPCISEvent_DocumentHeader" ToRole="EPCISDocumentHeader" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_DocumentHeader" FromRole="EPCISEvent_DocumentHeader" ToRole="EPCISEvent" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_EPC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="EPCID" Type="Int64" Nullable="false" />
+          <Property Name="IsParentID" Type="Boolean" Nullable="false" />
+          <Property Name="IsInput" Type="Boolean" Nullable="false" />
+          <Property Name="IsOutput" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EPC" Relationship="Self.FK_EPCISEvent_EPC_EPC" FromRole="EPCISEvent_EPC" ToRole="EPC" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_EPC" FromRole="EPCISEvent_EPC" ToRole="EPCISEvent" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_QuantityElement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="IsInput" Type="Boolean" Nullable="false" />
+          <Property Name="IsOutput" Type="Boolean" Nullable="false" />
+          <Property Name="QuantityElementID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_QuantityElement" FromRole="EPCISEvent_QuantityElement" ToRole="EPCISEvent" />
+          <NavigationProperty Name="QuantityElement" Relationship="Self.FK_QuantityElement_EPCISEvent_QuantityElement" FromRole="EPCISEvent_QuantityElement" ToRole="QuantityElement" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_SourceDestination">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsSource" Type="Boolean" Nullable="false" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="SourceDestinationID" Type="Int64" Nullable="false" />
+          <Property Name="SourceDestinationTypeID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_SourceDestination" FromRole="EPCISEvent_SourceDestination" ToRole="EPCISEvent" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_SourceDestinationID_EPCISEvent_SourceDestination" FromRole="EPCISEvent_SourceDestination" ToRole="Vocabulary" />
+          <NavigationProperty Name="Vocabulary1" Relationship="Self.FK_SourceDestinationTypeID_EPCISEvent_SourceDestination" FromRole="EPCISEvent_SourceDestination" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_TransformationID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="TransformationIDID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_Event_EPCISEvent_TransformationID" FromRole="EPCISEvent_TransformationID" ToRole="EPCISEvent" />
+          <NavigationProperty Name="TransformationID" Relationship="Self.FK_TransformationID_EPCISEvent_TransformationID" FromRole="EPCISEvent_TransformationID" ToRole="TransformationID" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="ValueTypeID" Type="Int64" Nullable="false" />
+          <Property Name="DataTypeID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID" FromRole="EPCISEvent_Value" ToRole="EPCISEvent" />
+          <NavigationProperty Name="EPCISEvent_Value_Datetime" Relationship="Self.FK_EPCISEvent_Value_Datetime_EPCISEvent_Value" FromRole="EPCISEvent_Value" ToRole="EPCISEvent_Value_Datetime" />
+          <NavigationProperty Name="EPCISEvent_Value_Hierarchy" Relationship="Self.FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value" FromRole="EPCISEvent_Value" ToRole="EPCISEvent_Value_Hierarchy" />
+          <NavigationProperty Name="EPCISEvent_Value_Hierarchy1" Relationship="Self.FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value" FromRole="EPCISEvent_Value" ToRole="EPCISEvent_Value_Hierarchy" />
+          <NavigationProperty Name="EPCISEvent_Value_Numeric" Relationship="Self.FK_EPCISEvent_Value_Numeric_EPCISEvent_Value" FromRole="EPCISEvent_Value" ToRole="EPCISEvent_Value_Numeric" />
+          <NavigationProperty Name="EPCISEvent_Value_String" Relationship="Self.FK_EPCISEvent_Value_String_EPCISEvent_Value" FromRole="EPCISEvent_Value" ToRole="EPCISEvent_Value_String" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_EPCISEvent_Value_DataType" FromRole="EPCISEvent_Value" ToRole="Vocabulary" />
+          <NavigationProperty Name="Vocabulary1" Relationship="Self.FK_Vocabulary_EPCISEvent_Value_ValueType" FromRole="EPCISEvent_Value" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Datetime">
+          <Key>
+            <PropertyRef Name="EPCISEvent_ValueID" />
+          </Key>
+          <Property Name="EPCISEvent_ValueID" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_EPCISEvent_Value_Datetime_EPCISEvent_Value" FromRole="EPCISEvent_Value_Datetime" ToRole="EPCISEvent_Value" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Hierarchy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEvent_ValueID" Type="Int64" Nullable="false" />
+          <Property Name="Parent_EPCISEvent_ValueID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value" FromRole="EPCISEvent_Value_Hierarchy" ToRole="EPCISEvent_Value" />
+          <NavigationProperty Name="EPCISEvent_Value1" Relationship="Self.FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value" FromRole="EPCISEvent_Value_Hierarchy" ToRole="EPCISEvent_Value" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_Numeric">
+          <Key>
+            <PropertyRef Name="EPCISEvent_ValueID" />
+          </Key>
+          <Property Name="EPCISEvent_ValueID" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_EPCISEvent_Value_Numeric_EPCISEvent_Value" FromRole="EPCISEvent_Value_Numeric" ToRole="EPCISEvent_Value" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Value_String">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEvent_ValueID" Type="Int64" Nullable="false" />
+          <Property Name="Value_StringID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_EPCISEvent_Value_String_EPCISEvent_Value" FromRole="EPCISEvent_Value_String" ToRole="EPCISEvent_Value" />
+          <NavigationProperty Name="Value_String" Relationship="Self.FK_EPCISEvent_Value_String_String_Value" FromRole="EPCISEvent_Value_String" ToRole="Value_String" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCISEventID" Type="Int64" Nullable="false" />
+          <Property Name="VocabularyID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_EPCISEvent_EPCISEvent_Vocabulary" FromRole="EPCISEvent_Vocabulary" ToRole="EPCISEvent" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_EPCISEvent_Vocabulary" FromRole="EPCISEvent_Vocabulary" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="QuantityElement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPCClassID" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="UOM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_QuantityElement" Relationship="Self.FK_QuantityElement_EPCISEvent_QuantityElement" FromRole="QuantityElement" ToRole="EPCISEvent_QuantityElement" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_VocabularyElement_QuantityElement" FromRole="QuantityElement" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="TransformationID">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_TransformationID" Relationship="Self.FK_TransformationID_EPCISEvent_TransformationID" FromRole="TransformationID" ToRole="EPCISEvent_TransformationID" />
+        </EntityType>
+        <EntityType Name="Value_String">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EPCISEvent_Value_String" Relationship="Self.FK_EPCISEvent_Value_String_String_Value" FromRole="Value_String" ToRole="EPCISEvent_Value_String" />
+        </EntityType>
+        <EntityType Name="EPCISEvent_Queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Client" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EPCISEvent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Processed" Type="Boolean" Nullable="false" />
+          <Property Name="Error" Type="Boolean" Nullable="false" />
+          <Property Name="EPCISEventOriginal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EPCISMasterData_Queue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Client" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EPCISMasterData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Processed" Type="Boolean" Nullable="false" />
+          <Property Name="Error" Type="Boolean" Nullable="false" />
+          <Property Name="EPCISMasterDataOriginal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStampGeneration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdditionalInformation" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="Int32" Nullable="false" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErrorLine" Type="Int32" Nullable="false" />
+          <Property Name="ErrorState" Type="Int32" Nullable="false" />
+          <Property Name="ObjectID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContentTypeID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="VocabularyAttribute" Relationship="Self.FK_AttributeType_VocabularyAttribute" FromRole="AttributeType" ToRole="VocabularyAttribute" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_ContentType_Vocabulary" FromRole="AttributeType" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="Vocabulary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="VocabularyTypeID" Type="Int64" Nullable="false" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Settings" Relationship="Self.FK_Vocabulary_Analysis_Settings_ClientID" FromRole="Vocabulary" ToRole="Settings" />
+          <NavigationProperty Name="Subscription" Relationship="Self.FK_Subscription_Vocabulary" FromRole="Vocabulary" ToRole="Subscription" />
+          <NavigationProperty Name="BusinessTransactionID" Relationship="Self.FK_Vocabulary_BusinessTransactionID" FromRole="Vocabulary" ToRole="BusinessTransactionID" />
+          <NavigationProperty Name="EPCISEvent" Relationship="Self.FK_Vocabulary_EPCISEvent" FromRole="Vocabulary" ToRole="EPCISEvent" />
+          <NavigationProperty Name="EPCISEvent_SourceDestination" Relationship="Self.FK_SourceDestinationID_EPCISEvent_SourceDestination" FromRole="Vocabulary" ToRole="EPCISEvent_SourceDestination" />
+          <NavigationProperty Name="EPCISEvent_SourceDestination1" Relationship="Self.FK_SourceDestinationTypeID_EPCISEvent_SourceDestination" FromRole="Vocabulary" ToRole="EPCISEvent_SourceDestination" />
+          <NavigationProperty Name="EPCISEvent_Value" Relationship="Self.FK_Vocabulary_EPCISEvent_Value_DataType" FromRole="Vocabulary" ToRole="EPCISEvent_Value" />
+          <NavigationProperty Name="EPCISEvent_Value1" Relationship="Self.FK_Vocabulary_EPCISEvent_Value_ValueType" FromRole="Vocabulary" ToRole="EPCISEvent_Value" />
+          <NavigationProperty Name="EPCISEvent_Vocabulary" Relationship="Self.FK_Vocabulary_EPCISEvent_Vocabulary" FromRole="Vocabulary" ToRole="EPCISEvent_Vocabulary" />
+          <NavigationProperty Name="QuantityElement" Relationship="Self.FK_VocabularyElement_QuantityElement" FromRole="Vocabulary" ToRole="QuantityElement" />
+          <NavigationProperty Name="AttributeType" Relationship="Self.FK_ContentType_Vocabulary" FromRole="Vocabulary" ToRole="AttributeType" />
+          <NavigationProperty Name="Vocabulary1" Relationship="Self.FK_Vocabulary_Vocabulary" FromRole="Vocabulary" ToRole="Vocabulary1" />
+          <NavigationProperty Name="Vocabulary2" Relationship="Self.FK_Vocabulary_Vocabulary" FromRole="Vocabulary1" ToRole="Vocabulary" />
+          <NavigationProperty Name="VocabularyAttribute" Relationship="Self.FK_Vocabulary_VocabularyAttribute" FromRole="Vocabulary" ToRole="VocabularyAttribute" />
+          <NavigationProperty Name="VocabularyChildren" Relationship="Self.FK_Vocabulary_VocabularyChildren" FromRole="Vocabulary" ToRole="VocabularyChildren" />
+          <NavigationProperty Name="VocabularyChildren1" Relationship="Self.FK_Vocabulary_VocabularyChildren_Child" FromRole="Vocabulary" ToRole="VocabularyChildren" />
+          <NavigationProperty Name="VocabularyType_Client" Relationship="Self.FK_VocabularyType_Client_Vocabulary" FromRole="Vocabulary" ToRole="VocabularyType_Client" />
+          <NavigationProperty Name="VocabularyType" Relationship="Self.FK_VocabularyType_Vocabulary" FromRole="Vocabulary" ToRole="VocabularyType" />
+        </EntityType>
+        <EntityType Name="VocabularyAttribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VocabularyID" Type="Int64" Nullable="false" />
+          <Property Name="AttributeTypeID" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttributeType" Relationship="Self.FK_AttributeType_VocabularyAttribute" FromRole="VocabularyAttribute" ToRole="AttributeType" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_VocabularyAttribute" FromRole="VocabularyAttribute" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="VocabularyChildren">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VocabularyID" Type="Int64" Nullable="false" />
+          <Property Name="ChildVocabularyID" Type="Int64" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_Vocabulary_VocabularyChildren" FromRole="VocabularyChildren" ToRole="Vocabulary" />
+          <NavigationProperty Name="Vocabulary1" Relationship="Self.FK_Vocabulary_VocabularyChildren_Child" FromRole="VocabularyChildren" ToRole="Vocabulary" />
+        </EntityType>
+        <EntityType Name="VocabularyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxOccurs" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_VocabularyType_Vocabulary" FromRole="VocabularyType" ToRole="Vocabulary" />
+          <NavigationProperty Name="VocabularyType_Client" Relationship="Self.FK_VocabularyType_Client_VocabularyClient" FromRole="VocabularyType" ToRole="VocabularyType_Client" />
+        </EntityType>
+        <EntityType Name="VocabularyType_Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="VocabularyTypeID" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="VocabularyTypeID" Type="Int64" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vocabulary" Relationship="Self.FK_VocabularyType_Client_Vocabulary" FromRole="VocabularyType_Client" ToRole="Vocabulary" />
+          <NavigationProperty Name="VocabularyType" Relationship="Self.FK_VocabularyType_Client_VocabularyClient" FromRole="VocabularyType_Client" ToRole="VocabularyType" />
+        </EntityType>
+        <EntityType Name="HELP">
+          <Key>
+            <PropertyRef Name="ObjectID" />
+          </Key>
+          <Property Name="ObjectID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Vocabulary_Analysis_Settings_ClientID">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Part_ToSchedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule_Part" Type="Self.Schedule_Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule_Part">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_ToSubscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="SubscriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscription_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Subscription">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader">
+          <End Role="EPCISDocumentHeader" Type="Self.EPCISDocumentHeader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_DocumentHeader" Type="Self.EPCISEvent_DocumentHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISDocumentHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_DocumentHeader">
+              <PropertyRef Name="DocumentHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID">
+          <End Role="BusinessTransactionID" Type="Self.BusinessTransactionID" Multiplicity="1" />
+          <End Role="EPCISEvent_BusinessTransactionID" Type="Self.EPCISEvent_BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessTransactionID">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_BusinessTransactionID">
+              <PropertyRef Name="BusinessTransactionIDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_BusinessTransactionID">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="BusinessTransactionID" Type="Self.BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BusinessTransactionID">
+              <PropertyRef Name="BusinessTransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPC_EPC">
+          <End Role="EPC" Type="Self.EPC" Multiplicity="1" />
+          <End Role="EPCISEvent_EPC" Type="Self.EPCISEvent_EPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPC">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_EPC">
+              <PropertyRef Name="EPCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_BusinessTransactionID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_BusinessTransactionID" Type="Self.EPCISEvent_BusinessTransactionID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_BusinessTransactionID">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_DocumentHeader">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_DocumentHeader" Type="Self.EPCISEvent_DocumentHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_DocumentHeader">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_EPC">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_EPC" Type="Self.EPCISEvent_EPC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_EPC">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_QuantityElement">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_QuantityElement" Type="Self.EPCISEvent_QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_QuantityElement">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_SourceDestination">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_EPCISEvent_Vocabulary">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Vocabulary" Type="Self.EPCISEvent_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Vocabulary">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EPCISEvent_TransformationID">
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_TransformationID" Type="Self.EPCISEvent_TransformationID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_TransformationID">
+              <PropertyRef Name="EPCISEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent" Type="Self.EPCISEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuantityElement_EPCISEvent_QuantityElement">
+          <End Role="QuantityElement" Type="Self.QuantityElement" Multiplicity="1" />
+          <End Role="EPCISEvent_QuantityElement" Type="Self.EPCISEvent_QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityElement">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_QuantityElement">
+              <PropertyRef Name="QuantityElementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceDestinationID_EPCISEvent_SourceDestination">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="SourceDestinationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceDestinationTypeID_EPCISEvent_SourceDestination">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_SourceDestination" Type="Self.EPCISEvent_SourceDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_SourceDestination">
+              <PropertyRef Name="SourceDestinationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransformationID_EPCISEvent_TransformationID">
+          <End Role="TransformationID" Type="Self.TransformationID" Multiplicity="1" />
+          <End Role="EPCISEvent_TransformationID" Type="Self.EPCISEvent_TransformationID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransformationID">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_TransformationID">
+              <PropertyRef Name="TransformationIDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Datetime_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Datetime" Type="Self.EPCISEvent_Value_Datetime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Datetime">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Hierarchy" Type="Self.EPCISEvent_Value_Hierarchy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Hierarchy">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1" />
+          <End Role="EPCISEvent_Value_Hierarchy" Type="Self.EPCISEvent_Value_Hierarchy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Hierarchy">
+              <PropertyRef Name="Parent_EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_Numeric_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_Numeric" Type="Self.EPCISEvent_Value_Numeric" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_Numeric">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_String_EPCISEvent_Value">
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EPCISEvent_Value_String" Type="Self.EPCISEvent_Value_String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPCISEvent_Value">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_String">
+              <PropertyRef Name="EPCISEvent_ValueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Value_DataType">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="DataTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Value_ValueType">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Value" Type="Self.EPCISEvent_Value" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value">
+              <PropertyRef Name="ValueTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EPCISEvent_Value_String_String_Value">
+          <End Role="Value_String" Type="Self.Value_String" Multiplicity="1" />
+          <End Role="EPCISEvent_Value_String" Type="Self.EPCISEvent_Value_String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Value_String">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Value_String">
+              <PropertyRef Name="Value_StringID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_EPCISEvent_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="EPCISEvent_Vocabulary" Type="Self.EPCISEvent_Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EPCISEvent_Vocabulary">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyElement_QuantityElement">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuantityElement" Type="Self.QuantityElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QuantityElement">
+              <PropertyRef Name="EPCClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeType_VocabularyAttribute">
+          <End Role="AttributeType" Type="Self.AttributeType" Multiplicity="1" />
+          <End Role="VocabularyAttribute" Type="Self.VocabularyAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyAttribute">
+              <PropertyRef Name="AttributeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContentType_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="AttributeType" Type="Self.AttributeType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeType">
+              <PropertyRef Name="ContentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="Vocabulary1" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary1">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyAttribute">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyAttribute" Type="Self.VocabularyAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyAttribute">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyChildren">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyChildren" Type="Self.VocabularyChildren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyChildren">
+              <PropertyRef Name="VocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vocabulary_VocabularyChildren_Child">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyChildren" Type="Self.VocabularyChildren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyChildren">
+              <PropertyRef Name="ChildVocabularyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Client_Vocabulary">
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="1" />
+          <End Role="VocabularyType_Client" Type="Self.VocabularyType_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vocabulary">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyType_Client">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Vocabulary">
+          <End Role="VocabularyType" Type="Self.VocabularyType" Multiplicity="1" />
+          <End Role="Vocabulary" Type="Self.Vocabulary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vocabulary">
+              <PropertyRef Name="VocabularyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VocabularyType_Client_VocabularyClient">
+          <End Role="VocabularyType" Type="Self.VocabularyType" Multiplicity="1" />
+          <End Role="VocabularyType_Client" Type="Self.VocabularyType_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VocabularyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VocabularyType_Client">
+              <PropertyRef Name="VocabularyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subscription_Trigger">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+          <End Role="Trigger" Type="Self.Trigger" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="RepositoryContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Settings" EntityType="Self.Settings" />
+          <EntitySet Name="Time" EntityType="Self.Time" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
+          <EntitySet Name="Schedule_Part" EntityType="Self.Schedule_Part" />
+          <EntitySet Name="Subscription" EntityType="Self.Subscription" />
+          <EntitySet Name="Trigger" EntityType="Self.Trigger" />
+          <EntitySet Name="EPCISDocumentHeader" EntityType="Self.EPCISDocumentHeader" />
+          <EntitySet Name="BusinessTransactionID" EntityType="Self.BusinessTransactionID" />
+          <EntitySet Name="EPC" EntityType="Self.EPC" />
+          <EntitySet Name="EPCISEvent" EntityType="Self.EPCISEvent" />
+          <EntitySet Name="EPCISEvent_BusinessTransactionID" EntityType="Self.EPCISEvent_BusinessTransactionID" />
+          <EntitySet Name="EPCISEvent_DocumentHeader" EntityType="Self.EPCISEvent_DocumentHeader" />
+          <EntitySet Name="EPCISEvent_EPC" EntityType="Self.EPCISEvent_EPC" />
+          <EntitySet Name="EPCISEvent_QuantityElement" EntityType="Self.EPCISEvent_QuantityElement" />
+          <EntitySet Name="EPCISEvent_SourceDestination" EntityType="Self.EPCISEvent_SourceDestination" />
+          <EntitySet Name="EPCISEvent_TransformationID" EntityType="Self.EPCISEvent_TransformationID" />
+          <EntitySet Name="EPCISEvent_Value" EntityType="Self.EPCISEvent_Value" />
+          <EntitySet Name="EPCISEvent_Value_Datetime" EntityType="Self.EPCISEvent_Value_Datetime" />
+          <EntitySet Name="EPCISEvent_Value_Hierarchy" EntityType="Self.EPCISEvent_Value_Hierarchy" />
+          <EntitySet Name="EPCISEvent_Value_Numeric" EntityType="Self.EPCISEvent_Value_Numeric" />
+          <EntitySet Name="EPCISEvent_Value_String" EntityType="Self.EPCISEvent_Value_String" />
+          <EntitySet Name="EPCISEvent_Vocabulary" EntityType="Self.EPCISEvent_Vocabulary" />
+          <EntitySet Name="QuantityElement" EntityType="Self.QuantityElement" />
+          <EntitySet Name="TransformationID" EntityType="Self.TransformationID" />
+          <EntitySet Name="Value_String" EntityType="Self.Value_String" />
+          <EntitySet Name="EPCISEvent_Queue" EntityType="Self.EPCISEvent_Queue" />
+          <EntitySet Name="EPCISMasterData_Queue" EntityType="Self.EPCISMasterData_Queue" />
+          <EntitySet Name="Error" EntityType="Self.Error" />
+          <EntitySet Name="AttributeType" EntityType="Self.AttributeType" />
+          <EntitySet Name="Vocabulary" EntityType="Self.Vocabulary" />
+          <EntitySet Name="VocabularyAttribute" EntityType="Self.VocabularyAttribute" />
+          <EntitySet Name="VocabularyChildren" EntityType="Self.VocabularyChildren" />
+          <EntitySet Name="VocabularyType" EntityType="Self.VocabularyType" />
+          <EntitySet Name="VocabularyType_Client" EntityType="Self.VocabularyType_Client" />
+          <EntitySet Name="HELP" EntityType="Self.HELP" />
+          <AssociationSet Name="FK_Vocabulary_Analysis_Settings_ClientID" Association="Self.FK_Vocabulary_Analysis_Settings_ClientID">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Part_ToSchedule" Association="Self.FK_Schedule_Part_ToSchedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Schedule_Part" EntitySet="Schedule_Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_ToSubscription" Association="Self.FK_Schedule_ToSubscription">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscription_Vocabulary" Association="Self.FK_Subscription_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Subscription" EntitySet="Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader" Association="Self.FK_EPCISDocumentHeader_EPCISEvent_DocumentHeader">
+            <End Role="EPCISDocumentHeader" EntitySet="EPCISDocumentHeader" />
+            <End Role="EPCISEvent_DocumentHeader" EntitySet="EPCISEvent_DocumentHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID" Association="Self.FK_BusinessTransactionID_EPCISEvent_BusinessTransactionID">
+            <End Role="BusinessTransactionID" EntitySet="BusinessTransactionID" />
+            <End Role="EPCISEvent_BusinessTransactionID" EntitySet="EPCISEvent_BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_BusinessTransactionID" Association="Self.FK_Vocabulary_BusinessTransactionID">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="BusinessTransactionID" EntitySet="BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPC_EPC" Association="Self.FK_EPCISEvent_EPC_EPC">
+            <End Role="EPC" EntitySet="EPC" />
+            <End Role="EPCISEvent_EPC" EntitySet="EPCISEvent_EPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_BusinessTransactionID" Association="Self.FK_EPCISEvent_EPCISEvent_BusinessTransactionID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_BusinessTransactionID" EntitySet="EPCISEvent_BusinessTransactionID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_DocumentHeader" Association="Self.FK_EPCISEvent_EPCISEvent_DocumentHeader">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_DocumentHeader" EntitySet="EPCISEvent_DocumentHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_EPC" Association="Self.FK_EPCISEvent_EPCISEvent_EPC">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_EPC" EntitySet="EPCISEvent_EPC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_QuantityElement" Association="Self.FK_EPCISEvent_EPCISEvent_QuantityElement">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_QuantityElement" EntitySet="EPCISEvent_QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_SourceDestination" Association="Self.FK_EPCISEvent_EPCISEvent_SourceDestination">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID" Association="Self.FK_EPCISEvent_EPCISEvent_Value_EPCISEvent_ID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_EPCISEvent_Vocabulary" Association="Self.FK_EPCISEvent_EPCISEvent_Vocabulary">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_Vocabulary" EntitySet="EPCISEvent_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EPCISEvent_TransformationID" Association="Self.FK_Event_EPCISEvent_TransformationID">
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+            <End Role="EPCISEvent_TransformationID" EntitySet="EPCISEvent_TransformationID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent" Association="Self.FK_Vocabulary_EPCISEvent">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent" EntitySet="EPCISEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuantityElement_EPCISEvent_QuantityElement" Association="Self.FK_QuantityElement_EPCISEvent_QuantityElement">
+            <End Role="QuantityElement" EntitySet="QuantityElement" />
+            <End Role="EPCISEvent_QuantityElement" EntitySet="EPCISEvent_QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceDestinationID_EPCISEvent_SourceDestination" Association="Self.FK_SourceDestinationID_EPCISEvent_SourceDestination">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceDestinationTypeID_EPCISEvent_SourceDestination" Association="Self.FK_SourceDestinationTypeID_EPCISEvent_SourceDestination">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_SourceDestination" EntitySet="EPCISEvent_SourceDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransformationID_EPCISEvent_TransformationID" Association="Self.FK_TransformationID_EPCISEvent_TransformationID">
+            <End Role="TransformationID" EntitySet="TransformationID" />
+            <End Role="EPCISEvent_TransformationID" EntitySet="EPCISEvent_TransformationID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Datetime_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Datetime_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Datetime" EntitySet="EPCISEvent_Value_Datetime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Hierarchy_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Hierarchy" EntitySet="EPCISEvent_Value_Hierarchy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Hierarchy_Parent_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Hierarchy" EntitySet="EPCISEvent_Value_Hierarchy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_Numeric_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_Numeric_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_Numeric" EntitySet="EPCISEvent_Value_Numeric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_String_EPCISEvent_Value" Association="Self.FK_EPCISEvent_Value_String_EPCISEvent_Value">
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+            <End Role="EPCISEvent_Value_String" EntitySet="EPCISEvent_Value_String" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Value_DataType" Association="Self.FK_Vocabulary_EPCISEvent_Value_DataType">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Value_ValueType" Association="Self.FK_Vocabulary_EPCISEvent_Value_ValueType">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Value" EntitySet="EPCISEvent_Value" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EPCISEvent_Value_String_String_Value" Association="Self.FK_EPCISEvent_Value_String_String_Value">
+            <End Role="Value_String" EntitySet="Value_String" />
+            <End Role="EPCISEvent_Value_String" EntitySet="EPCISEvent_Value_String" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_EPCISEvent_Vocabulary" Association="Self.FK_Vocabulary_EPCISEvent_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="EPCISEvent_Vocabulary" EntitySet="EPCISEvent_Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyElement_QuantityElement" Association="Self.FK_VocabularyElement_QuantityElement">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="QuantityElement" EntitySet="QuantityElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeType_VocabularyAttribute" Association="Self.FK_AttributeType_VocabularyAttribute">
+            <End Role="AttributeType" EntitySet="AttributeType" />
+            <End Role="VocabularyAttribute" EntitySet="VocabularyAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContentType_Vocabulary" Association="Self.FK_ContentType_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="AttributeType" EntitySet="AttributeType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_Vocabulary" Association="Self.FK_Vocabulary_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="Vocabulary1" EntitySet="Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyAttribute" Association="Self.FK_Vocabulary_VocabularyAttribute">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyAttribute" EntitySet="VocabularyAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyChildren" Association="Self.FK_Vocabulary_VocabularyChildren">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyChildren" EntitySet="VocabularyChildren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vocabulary_VocabularyChildren_Child" Association="Self.FK_Vocabulary_VocabularyChildren_Child">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyChildren" EntitySet="VocabularyChildren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Client_Vocabulary" Association="Self.FK_VocabularyType_Client_Vocabulary">
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+            <End Role="VocabularyType_Client" EntitySet="VocabularyType_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Vocabulary" Association="Self.FK_VocabularyType_Vocabulary">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="Vocabulary" EntitySet="Vocabulary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VocabularyType_Client_VocabularyClient" Association="Self.FK_VocabularyType_Client_VocabularyClient">
+            <End Role="VocabularyType" EntitySet="VocabularyType" />
+            <End Role="VocabularyType_Client" EntitySet="VocabularyType_Client" />
+          </AssociationSet>
+          <AssociationSet Name="Subscription_Trigger" Association="Self.Subscription_Trigger">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="Trigger" EntitySet="Trigger" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="qbqEPCISRepositoryModelStoreContainer" CdmEntityContainer="RepositoryContext">
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Time">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Time">
+              <MappingFragment StoreEntitySet="Time">
+                <ScalarProperty Name="PK_Date" ColumnName="PK_Date" />
+                <ScalarProperty Name="Date_Name" ColumnName="Date_Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Year_Name" ColumnName="Year_Name" />
+                <ScalarProperty Name="Half_Year" ColumnName="Half_Year" />
+                <ScalarProperty Name="Half_Year_Name" ColumnName="Half_Year_Name" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="Quarter_Name" ColumnName="Quarter_Name" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Month_Name" ColumnName="Month_Name" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Week_Name" ColumnName="Week_Name" />
+                <ScalarProperty Name="Day_Of_Year" ColumnName="Day_Of_Year" />
+                <ScalarProperty Name="Day_Of_Year_Name" ColumnName="Day_Of_Year_Name" />
+                <ScalarProperty Name="Day_Of_Half_Year" ColumnName="Day_Of_Half_Year" />
+                <ScalarProperty Name="Day_Of_Half_Year_Name" ColumnName="Day_Of_Half_Year_Name" />
+                <ScalarProperty Name="Day_Of_Quarter" ColumnName="Day_Of_Quarter" />
+                <ScalarProperty Name="Day_Of_Quarter_Name" ColumnName="Day_Of_Quarter_Name" />
+                <ScalarProperty Name="Day_Of_Month" ColumnName="Day_Of_Month" />
+                <ScalarProperty Name="Day_Of_Month_Name" ColumnName="Day_Of_Month_Name" />
+                <ScalarProperty Name="Day_Of_Week" ColumnName="Day_Of_Week" />
+                <ScalarProperty Name="Day_Of_Week_Name" ColumnName="Day_Of_Week_Name" />
+                <ScalarProperty Name="Week_Of_Year" ColumnName="Week_Of_Year" />
+                <ScalarProperty Name="Month_Of_Year" ColumnName="Month_Of_Year" />
+                <ScalarProperty Name="Month_Of_Half_Year" ColumnName="Month_Of_Half_Year" />
+                <ScalarProperty Name="Month_Of_Quarter" ColumnName="Month_Of_Quarter" />
+                <ScalarProperty Name="Quarter_Of_Year" ColumnName="Quarter_Of_Year" />
+                <ScalarProperty Name="Quarter_Of_Half_Year" ColumnName="Quarter_Of_Half_Year" />
+                <ScalarProperty Name="Half_Year_Of_Year" ColumnName="Half_Year_Of_Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+                <ScalarProperty Name="NextRun" ColumnName="NextRun" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule_Part">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Schedule_Part">
+              <MappingFragment StoreEntitySet="Schedule_Part">
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="DatePart" ColumnName="DatePart" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscription">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscription">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Subscription1" ColumnName="Subscription" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="DestinationEndpoint" ColumnName="DestinationEndpoint" />
+                <ScalarProperty Name="InitialRecordTime" ColumnName="InitialRecordTime" />
+                <ScalarProperty Name="LastRecordTime" ColumnName="LastRecordTime" />
+                <ScalarProperty Name="ReportIfEmpty" ColumnName="ReportIfEmpty" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trigger">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Trigger">
+              <MappingFragment StoreEntitySet="Trigger">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISDocumentHeader">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISDocumentHeader">
+              <MappingFragment StoreEntitySet="EPCISDocumentHeader">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HeaderVersion" ColumnName="HeaderVersion" />
+                <ScalarProperty Name="EPCISDocumentHeader1" ColumnName="EPCISDocumentHeader" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessTransactionID">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.BusinessTransactionID">
+              <MappingFragment StoreEntitySet="BusinessTransactionID">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+                <ScalarProperty Name="BusinessTransactionTypeID" ColumnName="BusinessTransactionTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPC">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPC">
+              <MappingFragment StoreEntitySet="EPC">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent">
+              <MappingFragment StoreEntitySet="EPCISEvent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+                <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+                <ScalarProperty Name="EventTimeZoneOffset" ColumnName="EventTimeZoneOffset" />
+                <ScalarProperty Name="XmlRepresentation" ColumnName="XmlRepresentation" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_BusinessTransactionID">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_BusinessTransactionID">
+              <MappingFragment StoreEntitySet="EPCISEvent_BusinessTransactionID">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="BusinessTransactionIDID" ColumnName="BusinessTransactionIDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_DocumentHeader">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_DocumentHeader">
+              <MappingFragment StoreEntitySet="EPCISEvent_DocumentHeader">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="DocumentHeaderID" ColumnName="DocumentHeaderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_EPC">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_EPC">
+              <MappingFragment StoreEntitySet="EPCISEvent_EPC">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="EPCID" ColumnName="EPCID" />
+                <ScalarProperty Name="IsParentID" ColumnName="IsParentID" />
+                <ScalarProperty Name="IsInput" ColumnName="IsInput" />
+                <ScalarProperty Name="IsOutput" ColumnName="IsOutput" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_QuantityElement">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_QuantityElement">
+              <MappingFragment StoreEntitySet="EPCISEvent_QuantityElement">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="IsInput" ColumnName="IsInput" />
+                <ScalarProperty Name="IsOutput" ColumnName="IsOutput" />
+                <ScalarProperty Name="QuantityElementID" ColumnName="QuantityElementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_SourceDestination">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_SourceDestination">
+              <MappingFragment StoreEntitySet="EPCISEvent_SourceDestination">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSource" ColumnName="IsSource" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="SourceDestinationID" ColumnName="SourceDestinationID" />
+                <ScalarProperty Name="SourceDestinationTypeID" ColumnName="SourceDestinationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_TransformationID">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_TransformationID">
+              <MappingFragment StoreEntitySet="EPCISEvent_TransformationID">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="TransformationIDID" ColumnName="TransformationIDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Value">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Value">
+              <MappingFragment StoreEntitySet="EPCISEvent_Value">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="ValueTypeID" ColumnName="ValueTypeID" />
+                <ScalarProperty Name="DataTypeID" ColumnName="DataTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Value_Datetime">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Datetime">
+              <MappingFragment StoreEntitySet="EPCISEvent_Value_Datetime">
+                <ScalarProperty Name="EPCISEvent_ValueID" ColumnName="EPCISEvent_ValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Value_Hierarchy">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Hierarchy">
+              <MappingFragment StoreEntitySet="EPCISEvent_Value_Hierarchy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEvent_ValueID" ColumnName="EPCISEvent_ValueID" />
+                <ScalarProperty Name="Parent_EPCISEvent_ValueID" ColumnName="Parent_EPCISEvent_ValueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Value_Numeric">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_Numeric">
+              <MappingFragment StoreEntitySet="EPCISEvent_Value_Numeric">
+                <ScalarProperty Name="EPCISEvent_ValueID" ColumnName="EPCISEvent_ValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Value_String">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Value_String">
+              <MappingFragment StoreEntitySet="EPCISEvent_Value_String">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEvent_ValueID" ColumnName="EPCISEvent_ValueID" />
+                <ScalarProperty Name="Value_StringID" ColumnName="Value_StringID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Vocabulary">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Vocabulary">
+              <MappingFragment StoreEntitySet="EPCISEvent_Vocabulary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCISEventID" ColumnName="EPCISEventID" />
+                <ScalarProperty Name="VocabularyID" ColumnName="VocabularyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuantityElement">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.QuantityElement">
+              <MappingFragment StoreEntitySet="QuantityElement">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EPCClassID" ColumnName="EPCClassID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransformationID">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.TransformationID">
+              <MappingFragment StoreEntitySet="TransformationID">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Value_String">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Value_String">
+              <MappingFragment StoreEntitySet="Value_String">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISEvent_Queue">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISEvent_Queue">
+              <MappingFragment StoreEntitySet="EPCISEvent_Queue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="EPCISEvent" ColumnName="EPCISEvent" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="EPCISEventOriginal" ColumnName="EPCISEventOriginal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EPCISMasterData_Queue">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.EPCISMasterData_Queue">
+              <MappingFragment StoreEntitySet="EPCISMasterData_Queue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="EPCISMasterData" ColumnName="EPCISMasterData" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="EPCISMasterDataOriginal" ColumnName="EPCISMasterDataOriginal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Error">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Error">
+              <MappingFragment StoreEntitySet="Error">
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+                <ScalarProperty Name="TimeStampGeneration" ColumnName="TimeStampGeneration" />
+                <ScalarProperty Name="AdditionalInformation" ColumnName="AdditionalInformation" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeType">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.AttributeType">
+              <MappingFragment StoreEntitySet="AttributeType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vocabulary">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.Vocabulary">
+              <MappingFragment StoreEntitySet="Vocabulary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="VocabularyTypeID" ColumnName="VocabularyTypeID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VocabularyAttribute">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.VocabularyAttribute">
+              <MappingFragment StoreEntitySet="VocabularyAttribute">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VocabularyID" ColumnName="VocabularyID" />
+                <ScalarProperty Name="AttributeTypeID" ColumnName="AttributeTypeID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VocabularyChildren">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.VocabularyChildren">
+              <MappingFragment StoreEntitySet="VocabularyChildren">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VocabularyID" ColumnName="VocabularyID" />
+                <ScalarProperty Name="ChildVocabularyID" ColumnName="ChildVocabularyID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VocabularyType">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.VocabularyType">
+              <MappingFragment StoreEntitySet="VocabularyType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URN" ColumnName="URN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaxOccurs" ColumnName="MaxOccurs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VocabularyType_Client">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.VocabularyType_Client">
+              <MappingFragment StoreEntitySet="VocabularyType_Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="VocabularyTypeID" ColumnName="VocabularyTypeID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HELP">
+            <EntityTypeMapping TypeName="qbq.EPCIS.RepositoryModel.HELP">
+              <MappingFragment StoreEntitySet="HELP">
+                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Subscription_Trigger" TypeName="qbq.EPCIS.RepositoryModel.Subscription_Trigger" StoreEntitySet="Subscription_Trigger">
+            <EndProperty Name="Subscription">
+              <ScalarProperty Name="ID" ColumnName="SubscriptionID" />
+            </EndProperty>
+            <EndProperty Name="Trigger">
+              <ScalarProperty Name="ID" ColumnName="TriggerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

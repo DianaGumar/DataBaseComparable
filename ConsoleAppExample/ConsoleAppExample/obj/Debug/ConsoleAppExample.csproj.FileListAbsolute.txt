@@ -1,0 +1,15 @@
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\ConsoleAppExample.exe.config
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\ConsoleAppExample.exe
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\ConsoleAppExample.pdb
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\EntityFramework.dll
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\EntityFramework.SqlServer.dll
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\qbq.EPCIS.EF.Repository.dll
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\qbq.EPCIS.EF.Repository.pdb
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\qbq.EPCIS.EF.Repository.dll.config
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\EntityFramework.xml
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\bin\Debug\EntityFramework.SqlServer.xml
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\obj\Debug\ConsoleAppExample.csprojAssemblyReference.cache
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\obj\Debug\ConsoleAppExample.csproj.CoreCompileInputs.cache
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\obj\Debug\ConsoleAppExample.csproj.CopyComplete
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\obj\Debug\ConsoleAppExample.exe
+E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\obj\Debug\ConsoleAppExample.pdb
