@@ -1,4 +1,5 @@
 ﻿using ConsoleAppExample.DAL;
+using ConsoleAppExample.View;
 using qbq.EPCIS.Repository.Custom.Business;
 using System;
 using System.Collections.Generic;
@@ -58,24 +59,31 @@ namespace ConsoleAppExample
 
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0, count; i < namesRepository.Count; i++)
+            for (int i = 0; i < namesRepository.Count; i++)
             {
                 try
                 {
-                    count = GeneralDBOperations.CheckTablesSimilarity(StrConnRepository,
+                    var data = GeneralDBOperations.CheckTablesSimilarity(StrConnRepository,
                     namesRepository[i], namesRepository2[i]);
 
-                    //if (count > 0) 
-                    sb.Append($"{count} \t {namesRepository[i]} \t | {namesRepository2[i]}\n");
+                    if(data.Count > 0)
+                    {
+                        sb.Append($"{ namesRepository[i]} \t | { namesRepository2[i]}\n");
+                        data.ForEach(str => {
+                            str.ForEach(item => { sb.Append(item); sb.Append("\t"); }); sb.Append("\n");
+                        });
+                        sb.Append("\n");
+                    }      
                 }
                 catch(Exception e)
                 {
+                    // после добавления проверки в запрос- убрать
                     sb.Append($"uncomparable {namesRepository[i]} | {namesRepository2[i]}\n");
                 }
             }
-            
-            Console.WriteLine(sb.ToString());
-            Console.ReadLine();
+
+            var path = @"D:\Repository_TableComparables.txt";
+            FileSystemView.ExportToTxt(path, sb.ToString());
         }
     }
 }

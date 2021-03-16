@@ -16,6 +16,7 @@ namespace ConsoleAppExample.DAL
                 "FROM INFORMATION_SCHEMA.TABLES where TABLE_TYPE = 'BASE TABLE';";
 
             cmd.Connection.Open();
+
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -33,24 +34,37 @@ namespace ConsoleAppExample.DAL
         }
 
         // returns count unequal rows
-        internal static int CheckTablesSimilarity(string StrConn, string foolTableName, string foolTableName2)
+        internal static List<List<object>> CheckTablesSimilarity(string StrConn, string foolTableName, string foolTableName2)
         {
+            var data = new List<List<object>>();
+
             SqlConnection conn = new SqlConnection(StrConn);
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = conn;
-            cmd.CommandText = "select count(*) as TotalCount from (" +
-                $"SELECT * FROM {foolTableName2} EXCEPT SELECT * FROM {foolTableName}) X;";
-                //$"SELECT * FROM @foolTableName EXCEPT SELECT * FROM @foolTableName2) X;";
+            cmd.CommandText = $"SELECT * FROM {foolTableName2} EXCEPT SELECT * FROM {foolTableName}";
 
             cmd.Connection.Open();
 
-            int countUnequal = (int)cmd.ExecuteScalar();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                object[] inside = new object[reader.FieldCount];
+                reader.GetValues(inside);
 
+                var internalData = new List<object>();
+                foreach (var item in inside)
+                {
+                    internalData.Add(item);
+                }
+                data.Add(internalData);
+            }
+
+            reader.Close();
             cmd.Dispose();
             conn.Close();
 
-            return countUnequal;
+            return data;
         }
     }
 }
