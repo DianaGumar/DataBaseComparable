@@ -90,7 +90,8 @@ namespace ConsoleAppExample.DAL
             SqlConnection conn = new SqlConnection(strConn);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandText = $"SELECT * FROM {foolTableName2} EXCEPT SELECT * FROM {foolTableName}";
+            cmd.CommandText = $"(SELECT * FROM {foolTableName} EXCEPT SELECT * FROM {foolTableName2})" +
+                $"union (SELECT * FROM {foolTableName2} EXCEPT SELECT * FROM {foolTableName})";
 
             cmd.Connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
@@ -124,8 +125,12 @@ namespace ConsoleAppExample.DAL
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             // potentialy sql injection
-            cmd.CommandText = $"SELECT {cellNamesFormating} FROM {foolTableName2} " +
-                $"EXCEPT SELECT {cellNamesFormating} FROM {foolTableName}";
+            cmd.CommandText = 
+                $"(SELECT {cellNamesFormating} FROM {foolTableName} EXCEPT " +
+                $"SELECT {cellNamesFormating} FROM {foolTableName2}) " +
+                $"union " +
+                $"(SELECT {cellNamesFormating} FROM {foolTableName2} EXCEPT " +
+                $"SELECT {cellNamesFormating} FROM {foolTableName})";
 
             cmd.Connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
