@@ -1,13 +1,9 @@
-﻿using ConsoleAppExample.DAL;
-using ConsoleAppExample.View;
-using qbq.EPCIS.Repository.Custom.Business;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using ConsoleAppExample.View;
+using ConsoleAppExample.DAL;
+using System.Linq;
+using System.Configuration;
 
 namespace ConsoleAppExample
 {
@@ -15,75 +11,43 @@ namespace ConsoleAppExample
     {
         static void Main(string[] args)
         {
-            //var executed = new DateTime();
-            //executed = DateTime.Now;
+            string StrConnDb = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
+            string StrConnDb2 = ConfigurationManager.ConnectionStrings["DB2"].ConnectionString;
 
-            //var client = "urn:quibiq:epcis:cbv:client:gmos";
-            //var pathToXml = @"E:\MBycycle\ConsoleApp1\ConsoleAppExample\ConsoleAppExample\TestApp\TestData\1.65MB 907Events.xml";
-            //var xEpcisEventDoc = XDocument.Load(pathToXml);
+            // get BD tables info
+            var tablesDb = TableView.GetTablesInfo(StrConnDb);
+            var tablesDb2 = TableView.GetTablesInfo(StrConnDb2);
 
-            //Console.WriteLine((DateTime.Now - executed).ToString());
-            //executed = DateTime.Now;
+            // delete keys
+            tablesDb.ForEach(t => {
+                t.CellsNames = GeneralDBOperations.GetTableCellsNamesExceptKeys(t.CellsNames);
+            });
+            tablesDb2.ForEach(t => {
+                t.CellsNames = GeneralDBOperations.GetTableCellsNamesExceptKeys(t.CellsNames);
+            });
 
-            //string StrConn = @"Data Source=DESKTOP-137JOC2;Database=qbq.EPCIS.Repository2;Integrated Security=True;Timeout=60";
+            // delete tables that cells has keys only
+            tablesDb = tablesDb.Where(t => t.CellsNames.Count > 0).ToList();
+            tablesDb2 = tablesDb2.Where(t => t.CellsNames.Count > 0).ToList();
 
-            //SqlConnection conn = new SqlConnection(StrConn);
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.Connection = conn;
-            //cmd.CommandText = "[Import].[usp_Import_Event_to_Queue]";
-            //cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.CommandTimeout = 60;
-
-            //cmd.Parameters.AddWithValue("@Client", client);
-            //cmd.Parameters.AddWithValue("@EPCISEvent", xEpcisEventDoc.ToString());
-
-            //cmd.Connection.Open();
-
-            //var reader = cmd.ExecuteXmlReader();
-            //var retMsg = XDocument.Load(reader).ToString();
-
-            //cmd.Dispose();
-            //cmd.Connection.Close();
-
-            //Console.WriteLine(retMsg);
-            //Console.WriteLine((DateTime.Now - executed).ToString());
-            //Console.ReadLine();
-
-
-            string StrConnRepository = @"Data Source=DESKTOP-137JOC2;Database=qbq.EPCIS.Repository;Integrated Security=True;Timeout=60";
-            string StrConnRepository2 = @"Data Source=DESKTOP-137JOC2;Database=qbq.EPCIS.Repository2;Integrated Security=True;Timeout=60";
-
-            // look likes [qbq.EPCIS.Repository].[Event].[BusinessTransactionID]
-            var namesRepository = GeneralDBOperations.GetDBTablesNames(StrConnRepository);
-            var namesRepository2 = GeneralDBOperations.GetDBTablesNames(StrConnRepository2);
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < namesRepository.Count; i++)
+            // get unsimilar data
+            var sb = new StringBuilder();
+            if(tablesDb.Count == tablesDb.Count)
             {
-                try
+                for (int i = 0; i < tablesDb.Count; i++)
                 {
-                    var data = GeneralDBOperations.CheckTablesSimilarity(StrConnRepository,
-                    namesRepository[i], namesRepository2[i]);
-
-                    if(data.Count > 0)
-                    {
-                        sb.Append($"{ namesRepository[i]} \t | { namesRepository2[i]}\n");
-                        data.ForEach(str => {
-                            str.ForEach(item => { sb.Append(item); sb.Append("\t"); }); sb.Append("\n");
-                        });
-                        sb.Append("\n");
-                    }      
-                }
-                catch(Exception e)
-                {
-                    // после добавления проверки в запрос- убрать
-                    sb.Append($"uncomparable {namesRepository[i]} | {namesRepository2[i]}\n");
+                    sb.Append(TableView.CheckTablesSimilarityView(StrConnDb,
+                        tablesDb[i], tablesDb2[i]));
+                    sb.Append("\n");
                 }
             }
 
-            var path = @"D:\Repository_TableComparables.txt";
-            FileSystemView.ExportToTxt(path, sb.ToString());
+            // visualising
+            var path = ConfigurationManager.AppSettings.Get("ResultPath");
+            using (StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8))
+            {
+                sw.WriteLine(sb.ToString());
+            }
         }
     }
 }

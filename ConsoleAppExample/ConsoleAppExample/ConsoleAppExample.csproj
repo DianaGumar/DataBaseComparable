@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,39 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\EventImporter.cs" />
-    <Compile Include="Business\ImportExtensions.cs" />
+    <Compile Include="View\TableView.cs" />
     <Compile Include="DAL\GeneralDBOperations.cs" />
-    <Compile Include="Entities\EpcisEventBusinessTransactionId.cs" />
-    <Compile Include="Entities\EpcisEventEpc.cs" />
-    <Compile Include="Entities\EpcisEventError.cs" />
-    <Compile Include="Entities\EpcisEventExtenstionType.cs" />
-    <Compile Include="Entities\EpcisEventIds.cs" />
-    <Compile Include="Entities\EpcisEventQuantityElement.cs" />
-    <Compile Include="Entities\EpcisEventSourceDestination.cs" />
-    <Compile Include="Entities\EpcisEventTransformationId.cs" />
-    <Compile Include="Entities\EpcisEventValue.cs" />
-    <Compile Include="Entities\EpcisEventValueStringValueString.cs" />
-    <Compile Include="Entities\EpcisEventValueValues.cs" />
-    <Compile Include="Entities\EpcisEventVocabulary.cs" />
-    <Compile Include="Entities\EventData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\FileSystemView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestApp\TestData\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\qbq.EPCIS.EF.Repository\qbq.EPCIS.EF.Repository.csproj">
-      <Project>{3af93106-0374-42e2-8887-1811ce31ae0d}</Project>
-      <Name>qbq.EPCIS.EF.Repository</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
